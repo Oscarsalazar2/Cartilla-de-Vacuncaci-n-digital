@@ -64,4 +64,73 @@ Su interfaz está diseñada con un estilo moderno, intuitivo y en armonía con l
 ---
 
 ## 📂 Estructura del proyecto
+📁 Cartilla-de-Vacunacion-Digital
+│
+├── index.html # Página principal del sitio
+├── login.html # Página de inicio de sesión
+├── dashboard.html # Panel principal del usuario
+├── privacidad.html # Aviso de privacidad institucional
+│
+├── style.css # Estilos generales de la página
+├── login.css # Estilos específicos del login
+│
+├── main.js # Lógica general del sitio
+├── login.js # Validaciones y funciones del login
+├── dashboard.js # Funcionalidad del panel de usuario
+│
+├── logo.jpg # Logo del proyecto (ITM / eCartilla)
+├── README.md # Documentación del proyecto
+└── /assets # Carpeta opcional para imágenes o PDFs
 
+
+---
+
+## ⚙️ Instalación y ejecución
+
+1. **Clonar el repositorio desde GitHub**
+   ```bash
+   git clone https://github.com/Oscarsalazar2/Cartilla-de-Vacunaci-n-digital.git
+   Entrar al directorio del proyecto
+
+cd Cartilla-de-Vacunaci-n-digital
+
+
+Abrir el proyecto en Visual Studio Code
+
+code .
+
+
+Ejecutar en navegador local
+
+Opción 1: Abre index.html manualmente.
+
+Opción 2: Usa la extensión Live Server en VS Code y abre en http://localhost:5500.
+
+📸 Capturas del proyecto
+
+(Agrega tus imágenes aquí para mostrar el diseño final de la interfaz)
+
+![Login principal](screenshots/login.png)
+![Dashboard de usuario](screenshots/dashboard.png)
+![Aviso de privacidad](screenshots/privacidad.png)
+
+🧠 Objetivos del proyecto
+
+Modernizar la cartilla de vacunación tradicional, adaptándola a entornos digitales.
+
+Facilitar el control de esquemas de vacunación en escuelas, clínicas y hogares.
+
+Garantizar la seguridad y privacidad de los datos del usuario.
+
+Promover la cultura tecnológica en la salud pública.
+
+🔒 Aviso de privacidad
+
+Los datos personales ingresados en la plataforma serán tratados conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (México).
+El sistema garantiza la confidencialidad, integridad y seguridad de la información del usuario, no compartiendo datos con terceros sin autorización expresa.
+
+🧾 Licencia
+
+Este proyecto está bajo la Licencia MIT, que permite su uso, modificación y distribución con atribución al autor original.
+Consulta el texto completo en el archivo LICENSE o en opensource.org/licenses/MIT
+.
