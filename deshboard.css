@@ -616,20 +616,58 @@ th {
 }
 
 /* Opcional: cuando imprimas, deja solo la cartilla */
-@media print{
-  body *{
-    visibility:hidden;
+/* ===== Estilo de impresión para cartilla ===== */
+@media print {
+  body * {
+    visibility: hidden;
   }
-  #cartillaPrintArea, #cartillaPrintArea *{
-    visibility:visible;
+
+  #cartillaPrintArea,
+  #cartillaPrintArea * {
+    visibility: visible;
   }
-  #cartillaPrintArea{
-    position:absolute;
-    inset:0;
-    margin:0;
-    padding:1.5rem;
+
+  #cartillaPrintArea {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 1.5rem;
+    background: #ffffff;
   }
 }
+
+
+/* ===== Diseño del encabezado de la cartilla ===== */
+.cartilla-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cartilla-logo img {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.cartilla-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cartilla-header-text b {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cartilla-header-text small {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
 
 /* ===== Mi perfil ===== */
 
@@ -857,4 +895,146 @@ th {
 .perfil-auto-msg{
   margin-top:.4rem;
   font-size:.75rem;
+}
+
+.cartilla-head-actions{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+
+/* El botón ya usa .btn-azul; solo lo alineamos */
+.cartilla-head-actions .btn-azul{
+  font-size:.8rem;
+  padding:.35rem .75rem;
+}
+
+/* Si quieres que el botón agregar-vacuna en la tabla se vea igual que los otros íconos, 
+   ya usa .btn-usr-icon, así que no necesitas CSS extra */
+
+
+.usuarios-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:.75rem;
+}
+
+.usuarios-filtros{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+}
+
+.usuarios-busqueda input{
+  border-radius:999px;
+  border:1px solid var(--borde);
+  padding:.3rem .8rem;
+  font-size:.85rem;
+  min-width:220px;
+}
+
+.usuarios-busqueda input:focus{
+  outline:none;
+  border-color:var(--azul);
+  box-shadow:0 0 0 2px color-mix(in oklab, var(--azul) 25%, transparent);
+}
+
+/* ===== Usuarios: header, buscador y botón + ===== */
+.usuarios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.usuarios-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.usuarios-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.usuarios-busqueda input {
+  border-radius: 999px;
+  border: 1px solid var(--borde);
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  min-width: 220px;
+}
+.usuarios-busqueda input:focus {
+  outline: none;
+  border-color: var(--azul);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--azul) 25%, transparent);
+}
+.usuarios-plus {
+  height: 34px;
+  width: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--borde);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.08s ease,
+    box-shadow 0.15s ease;
+}
+.usuarios-plus i {
+  font-size: 0.9rem;
+  color: var(--azul);
+}
+.usuarios-plus:hover {
+  background: #f1f5f9;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+.usuarios-plus:active {
+  transform: translateY(1px);
+}
+
+/* ===== Modal Registrar vacuna ===== */
+.rv-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.rv-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.85rem;
+}
+.rv-field span {
+  color: var(--muted);
+}
+.rv-field input,
+.rv-field select,
+.rv-field textarea {
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  outline: none;
+}
+.rv-field input:focus,
+.rv-field select:focus,
+.rv-field textarea:focus {
+  border-color: var(--azul);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--azul) 25%, transparent);
+}
+.rv-field-full {
+  grid-column: 1 / -1;
+}
+.rv-actions {
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+@media (max-width: 768px) {
+  .rv-grid {
+    grid-template-columns: 1fr;
+  }
 }

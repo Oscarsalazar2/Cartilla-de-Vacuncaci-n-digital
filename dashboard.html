@@ -69,61 +69,138 @@
       </aside>
       <!-- Modal: Cartilla del usuario -->
       <div class="pac-modal" id="modalCartillaUsuario">
+  <div class="pac-modal-backdrop" data-close-pac-modal></div>
+  <div class="pac-modal-card pac-modal-cartilla">
+    <div class="pac-modal-head">
+      <div>
+        <h3>Cartilla de vacunación</h3>
+        <p class="muted">Vacunas registradas para este usuario.</p>
+      </div>
+      <div class="cartilla-actions">
+        <button type="button" class="btn-ghost" data-close-pac-modal>
+          Cerrar
+        </button>
+        <button type="button" class="btn-azul" id="btnDescargarCartilla">
+          <i class="fa-solid fa-download"></i> Descargar cartilla
+        </button>
+      </div>
+    </div>
+
+    <div class="pac-modal-body">
+      <!-- SOLO esta zona se imprimirá -->
+      <div id="cartillaPrintArea">
+        <div class="cartilla-header">
+          <div class="cartilla-logo">
+            <img src="logo.jpg" alt="Logo eCartilla" />
+          </div>
+          <div class="cartilla-header-text">
+            <!-- Estos IDs se rellenan desde JS -->
+            <b id="cartillaNombreUsuario">Nombre del usuario</b>
+            <span id="cartillaEmailUsuario">correo@example.com</span>
+            <small>Cartilla digital de vacunación</small>
+          </div>
+        </div>
+
+        <div class="dash-card cartilla-card">
+          <b>Vacunas registradas</b>
+          <table>
+            <thead>
+              <tr>
+                <th>Vacuna</th>
+                <th>Fecha</th>
+                <th>Dosis</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="cartillaTablaBody">
+              <!-- filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- fin cartillaPrintArea -->
+    </div>
+  </div>
+</div>
+
+
+      <!-- Modal Registrar Vacuna -->
+      <div class="pac-modal" id="modalRegistrarVacuna">
         <div class="pac-modal-backdrop"></div>
-        <div class="pac-modal-card pac-modal-cartilla">
+
+        <div class="pac-modal-card" style="max-width: 600px">
           <div class="pac-modal-head">
-            <div>
-              <h3 id="cartillaUsuarioTitulo">Cartilla de vacunación</h3>
-              <p class="muted" id="cartillaUsuarioSubtitulo">
-                Esquema de vacunas registradas para este usuario.
-              </p>
-            </div>
+            <h3><i class="fa-solid fa-plus"></i> Registrar nueva vacuna</h3>
             <button class="pac-modal-close" data-close-pac-modal>
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
           <div class="pac-modal-body">
-            <!-- Zona que se usará para imprimir/descargar -->
-            <div id="cartillaPrintArea">
-              <div class="cartilla-header">
-                <div class="cartilla-logo">
-                  <img src="logo.jpg" alt="Logo eCartilla" />
-                </div>
-                <div class="cartilla-header-text">
-                  <b id="cartillaNombreUsuario">Nombre del usuario</b>
-                  <span id="cartillaEmailUsuario">correo@example.com</span>
-                  <small>Cartilla digital de vacunación</small>
-                </div>
-              </div>
+            <form id="formRegistrarVacuna" class="perfil-grid">
+              <label class="perfil-field perfil-field-full">
+                <span>Paciente</span>
+                <input
+                  type="text"
+                  id="rvPaciente"
+                  readonly
+                  placeholder="Paciente seleccionado"
+                />
+              </label>
 
-              <div class="dash-card cartilla-card">
-                <b>Vacunas registradas</b>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Vacuna</th>
-                      <th>Fecha</th>
-                      <th>Dosis</th>
-                      <th>Estado</th>
-                    </tr>
-                  </thead>
-                  <tbody id="cartillaTablaBody">
-                    <!-- filas generadas por JS -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <!-- fin cartillaPrintArea -->
+              <label class="perfil-field perfil-field-full">
+                <span>Vacuna</span>
+                <select id="rvVacuna" required>
+                  <option value="">Seleccionar...</option>
+                  <option value="COVID-19">COVID-19</option>
+                  <option value="Influenza">Influenza</option>
+                  <option value="Hepatitis B">Hepatitis B</option>
+                  <option value="Tétanos">Tétanos</option>
+                  <option value="Triple Viral (SRP)">Triple Viral (SRP)</option>
+                </select>
+              </label>
 
-            <div class="cartilla-actions">
-              <button type="button" class="btn-ghost" data-close-pac-modal>
-                Cerrar
-              </button>
-              <button type="button" class="btn-azul" id="btnDescargarCartilla">
-                <i class="fa-solid fa-download"></i> Descargar cartilla
-              </button>
-            </div>
+              <label class="perfil-field">
+                <span>Dosis</span>
+                <input
+                  type="text"
+                  id="rvDosis"
+                  placeholder="Ej. 2 / 3"
+                  required
+                />
+              </label>
+
+              <label class="perfil-field">
+                <span>Lote</span>
+                <input
+                  type="text"
+                  id="rvLote"
+                  placeholder="Ej. L-245A"
+                  required
+                />
+              </label>
+
+              <label class="perfil-field">
+                <span>Fecha de aplicación</span>
+                <input type="date" id="rvFecha" required />
+              </label>
+
+              <label class="perfil-field perfil-field-full">
+                <span>Observaciones</span>
+                <textarea
+                  id="rvObs"
+                  rows="3"
+                  placeholder="Ej. Sin reacciones adversas"
+                ></textarea>
+              </label>
+
+              <div class="perfil-actions">
+                <button class="btn-ghost" type="button" id="rvCancelar">
+                  Cancelar
+                </button>
+                <button class="btn-azul" type="submit">Guardar registro</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -323,6 +400,13 @@
                     Personal médico
                   </button>
                 </div>
+                <div class="usuarios-busqueda">
+                  <input
+                    type="text"
+                    id="usuariosSearchInput"
+                    placeholder="Buscar por nombre, correo o CURP"
+                  />
+                </div>
               </div>
 
               <table class="tabla-usuarios">
@@ -330,6 +414,7 @@
                   <tr>
                     <th>Nombre</th>
                     <th>Tipo</th>
+                    <th>CURP</th>
                     <th>Correo</th>
                     <th>Rol</th>
                     <th>Estado</th>
@@ -341,16 +426,19 @@
                   <tr
                     data-user-id="1"
                     data-user-nombre="Juan Pérez"
-                    data-user-tipo="ciudadano"
                     data-user-email="juan@example.com"
+                    data-user-curp="PEPJ800101HDFRRN09"
+                    data-tipo="ciudadano"
                   >
                     <td>Juan Pérez</td>
                     <td>Ciudadano</td>
+                    <td>PEPJ800101HDFRRN09</td>
                     <td>juan@example.com</td>
                     <td>Usuario</td>
                     <td><span class="badge badge-activo">Activo</span></td>
                     <td>
                       <div class="usuarios-actions">
+                        <!-- Ver cartilla -->
                         <button
                           class="btn-usr-icon ver-cartilla-usuario"
                           type="button"
@@ -358,6 +446,20 @@
                         >
                           <i class="fa-solid fa-syringe"></i>
                         </button>
+
+                        <!-- Agregar vacuna (Idea 1) -->
+                        <button
+                          class="btn-usr-icon agregar-vacuna-usuario"
+                          type="button"
+                          title="Registrar nueva vacuna"
+                          data-user-nombre="Juan Pérez"
+                          data-user-email="juan@example.com"
+                          style="display: none"
+                        >
+                          <i class="fa-solid fa-plus"></i>
+                        </button>
+
+                        <!-- Editar / Eliminar como ya tenías -->
                         <button
                           class="btn-usr-icon editar-usuario"
                           type="button"
@@ -368,7 +470,7 @@
                         <button
                           class="btn-usr-icon eliminar-usuario"
                           type="button"
-                          title="Eliminar usuario"
+                          title="Eliminar"
                         >
                           <i class="fa-solid fa-trash"></i>
                         </button>
@@ -381,11 +483,13 @@
                     data-user-nombre="Dra. Ana López"
                     data-user-tipo="medico"
                     data-user-email="ana.medico@example.com"
+                    data-user-curp="LOLA850202MDFRRS07"
                   >
                     <td>Dra. Ana López</td>
                     <td>Personal médico</td>
+                    <td>LOLA850202MDFRRS07</td>
                     <td>ana.medico@example.com</td>
-                    <td>Pediatra</td>
+                    <td>Personal médico</td>
                     <td><span class="badge badge-activo">Activo</span></td>
                     <td>
                       <div class="usuarios-actions">

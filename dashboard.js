@@ -351,7 +351,36 @@ accHeads.forEach((head) => {
     item.classList.toggle("perfil-acc-open");
   });
 });
-  
+
+// Buscador por nombre / correo / CURP
+const usuariosSearchInput = document.getElementById("usuariosSearchInput");
+
+if (usuariosSearchInput) {
+  usuariosSearchInput.addEventListener("input", () => {
+    const term = usuariosSearchInput.value.trim().toLowerCase();
+
+    tablaUsuariosBody?.querySelectorAll("tr").forEach((tr) => {
+      const nombre = (tr.getAttribute("data-user-nombre") || "").toLowerCase();
+      const email = (tr.getAttribute("data-user-email") || "").toLowerCase();
+      const curp = (tr.getAttribute("data-user-curp") || "").toLowerCase();
+
+      const matches =
+        !term ||
+        nombre.includes(term) ||
+        email.includes(term) ||
+        curp.includes(term);
+
+      // además respetamos el filtro actual (ciudadano / medico / todos)
+      const btnActivo = document.querySelector(".usuarios-pill-activo");
+      const filtro = btnActivo?.getAttribute("data-usuarios-filter") || "todos";
+      const tipoFila = tr.getAttribute("data-tipo") || "todos";
+
+      const pasaFiltro = filtro === "todos" || filtro === tipoFila;
+
+      tr.style.display = matches && pasaFiltro ? "" : "none";
+    });
+  });
+}
 
 // ===== Guardado automático de contacto + domicilio (demo con localStorage) =====
 const autoFields = [
@@ -420,3 +449,129 @@ btnPassGuardar?.addEventListener("click", () => {
   inputPassNueva.value = "";
   inputPassConfirmar.value = "";
 });
+
+const userRole = localStorage.getItem("userRole") || "ciudadano";
+ 
+// Botones "Agregar vacuna" en tabla
+const btnsAgregarVacuna = document.querySelectorAll(".agregar-vacuna-usuario");
+// Botón "Registrar vacuna" dentro del modal de cartilla
+const btnRegistrarDesdeCartilla = document.getElementById("btnRegistrarDesdeCartilla");
+
+// Mostrar solo a admin / medico
+if (userRole === "admin" || userRole === "medico") {
+  
+// Abrir modal Registrar vacuna desde la cartilla
+btnRegistrarDesdeCartilla?.addEventListener("click", () => {
+  const nombre = cartillaNombreUsuario?.textContent?.trim() || "";
+  abrirModalRegistrar(nombre);
+});
+
+btnsAgregarVacuna.forEach((btn) => {
+    btn.style.display = "inline-flex";
+  });
+  if (btnRegistrarDesdeCartilla) {
+    btnRegistrarDesdeCartilla.style.display = "inline-flex";
+  }
+}
+
+// ===== Modal Registrar Vacuna =====
+const modalRegistrarVacuna = document.getElementById("modalRegistrarVacuna");
+const rvPaciente = document.getElementById("rvPaciente");
+const rvVacuna = document.getElementById("rvVacuna");
+const rvDosis = document.getElementById("rvDosis");
+const rvLote = document.getElementById("rvLote");
+const rvFecha = document.getElementById("rvFecha");
+const rvObs = document.getElementById("rvObs");
+const rvCancelar = document.getElementById("rvCancelar");
+const formRegistrarVacuna = document.getElementById("formRegistrarVacuna");
+
+function abrirModalRegistrar(nombrePaciente){
+  if (!modalRegistrarVacuna) return;
+  rvPaciente.value = nombrePaciente || "";
+  modalRegistrarVacuna.classList.add("open");
+}
+
+function cerrarModalRegistrar(){
+  if (!modalRegistrarVacuna) return;
+  modalRegistrarVacuna.classList.remove("open");
+  formRegistrarVacuna?.reset();
+}
+
+rvCancelar?.addEventListener("click", cerrarModalRegistrar);
+
+document
+  .querySelectorAll("#modalRegistrarVacuna .pac-modal-backdrop, #modalRegistrarVacuna .pac-modal-close")
+  .forEach((el) => {
+    el.addEventListener("click", cerrarModalRegistrar);
+  });
+
+  
+// Abrir modal Registrar vacuna desde la cartilla
+btnRegistrarDesdeCartilla?.addEventListener("click", () => {
+  const nombre = cartillaNombreUsuario?.textContent?.trim() || "";
+  abrirModalRegistrar(nombre);
+});
+
+btnsAgregarVacuna.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const nombre =
+      btn.dataset.userNombre ||
+      btn.closest("tr")?.dataset.userNombre ||
+      "";
+    abrirModalRegistrar(nombre);
+  });
+});
+
+formRegistrarVacuna?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const nombrePaciente = rvPaciente.value.trim();
+  const vacuna = rvVacuna.value.trim();
+  const dosis = rvDosis.value.trim();
+  const lote = rvLote.value.trim();
+  const fecha = rvFecha.value;
+  const obs = rvObs.value.trim();
+
+  if (!nombrePaciente || !vacuna || !dosis || !lote || !fecha) {
+    alert("Por favor llena todos los campos obligatorios.");
+    return;
+  }
+
+  // Aquí necesitarás saber con qué correo se guarda.
+  // De momento, usamos el correo de la cartilla abierta:
+  const correo = emailCartillaActual || "";
+
+  // DEMO: guardamos en cartillasUsuarios (luego será BD)
+  if (correo) {
+    if (!cartillasUsuarios[correo]) cartillasUsuarios[correo] = [];
+    cartillasUsuarios[correo].push({
+      vacuna,
+      fecha,
+      dosis,
+      estado: "Aplicada", // puedes mejorar esto según dosis
+      lote,
+      obs,
+    });
+
+    // Si la cartilla de este usuario está abierta, recargamos la tabla
+    if (modalCartillaUsuario?.classList.contains("open")) {
+      cartillaTablaBody.innerHTML = "";
+      cartillasUsuarios[correo].forEach((item) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.vacuna}</td>
+          <td>${item.fecha}</td>
+          <td>${item.dosis}</td>
+          <td>${item.estado}</td>
+        `;
+        cartillaTablaBody.appendChild(tr);
+      });
+    }
+  }
+
+  alert("Vacuna registrada (demo, falta conectar a la BD).");
+  cerrarModalRegistrar();
+
+  
+});
+
