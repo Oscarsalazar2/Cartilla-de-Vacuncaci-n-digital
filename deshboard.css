@@ -1,4 +1,6 @@
-/*Layout general*/
+/* =======================
+   LAYOUT GENERAL
+======================= */
 body.dashboard {
   margin: 0;
   min-height: 100vh;
@@ -15,14 +17,12 @@ body.dashboard {
   min-height: 100vh;
 }
 
-/*Rail lateral*/
+/* =======================
+   RAIL LATERAL
+======================= */
 .side-rail {
   width: 80px;
-  background: color-mix(
-    in oklab,
-    var(--texto) 90%,
-    #000
-  ); /* gris azul oscuro */
+  background: color-mix(in oklab, var(--texto) 90%, #000);
   border-right: 1px solid rgba(15, 23, 42, 0.9);
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@ body.dashboard {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0) invert(1); /* igual que tu logo en index */
+  filter: brightness(0) invert(1);
 }
 
 .rail-divider {
@@ -63,7 +63,6 @@ body.dashboard {
   border: 2px solid var(--azul);
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.6);
   margin-bottom: 0.75rem;
-  /* El contenido (foto o iniciales) lo mete tu JS */
 }
 
 .rail-nav {
@@ -108,7 +107,9 @@ body.dashboard {
   flex: 1;
 }
 
-/* principal */
+/* =======================
+   PRINCIPAL
+======================= */
 .main {
   flex: 1;
   display: flex;
@@ -117,7 +118,9 @@ body.dashboard {
   background: color-mix(in oklab, var(--bg) 92%, #e5e7eb);
 }
 
-/*  Barra superior*/
+/* =======================
+   BARRA SUPERIOR
+======================= */
 .topbar {
   height: 60px;
   border-bottom: 1px solid var(--borde);
@@ -200,7 +203,7 @@ body.dashboard {
   color: var(--muted);
 }
 
-/* Dropdown usuario (oscuro para contraste) */
+/* Dropdown usuario */
 .user-dropdown {
   position: absolute;
   right: 1.25rem;
@@ -238,7 +241,9 @@ body.dashboard {
   color: #fecaca;
 }
 
-/* ===== Contenido ===== */
+/* =======================
+   CONTENIDO
+======================= */
 .content {
   padding: 1.25rem;
   flex: 1;
@@ -299,6 +304,7 @@ body.dashboard {
   margin-top: 0.25rem;
 }
 
+/* Tablas genéricas */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -318,7 +324,9 @@ th {
   background: #f9fafb;
 }
 
-/* ===== Modal o ventana de vacuna ===== */
+/* =======================
+   MODAL VACUNA
+======================= */
 .modal-vacuna {
   position: fixed;
   inset: 0;
@@ -367,7 +375,9 @@ th {
   }
 }
 
-/* Badges de estado (Admin usuarios) */
+/* =======================
+   BADGES
+======================= */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -376,11 +386,13 @@ th {
   font-size: 0.75rem;
   border: 1px solid transparent;
 }
+
 .badge-pendiente {
   background: color-mix(in oklab, var(--azul) 10%, #f1f5f9);
   border-color: color-mix(in oklab, var(--azul) 35%, #e2e8f0);
   color: #0b3a55;
 }
+
 .badge-activo {
   background: color-mix(in oklab, var(--verde) 12%, #f0fdf4);
   border-color: color-mix(in oklab, var(--verde) 40%, #bbf7d0);
@@ -411,18 +423,33 @@ th {
   background: #f8fafc;
 }
 
-/* ===== Usuarios (admin) ===== */
-
+/* =======================
+   USUARIOS (ADMIN)
+======================= */
 .usuarios-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
   margin-bottom: 0.75rem;
+}
+
+.usuarios-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.usuarios-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .usuarios-filtros {
   display: flex;
-  gap: 0.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .usuarios-pill {
@@ -438,6 +465,19 @@ th {
   background: color-mix(in oklab, var(--azul) 12%, #eff6ff);
   border-color: color-mix(in oklab, var(--azul) 40%, #bfdbfe);
   color: #0b3a55;
+}
+
+.usuarios-busqueda input {
+  border-radius: 999px;
+  border: 1px solid var(--borde);
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  min-width: 220px;
+}
+.usuarios-busqueda input:focus {
+  outline: none;
+  border-color: var(--azul);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--azul) 25%, transparent);
 }
 
 .tabla-usuarios td:last-child {
@@ -466,183 +506,105 @@ th {
   background: #f8fafc;
 }
 
-/* Reaprovechamos badges que ya hicimos para admin/pacientes */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.1rem 0.6rem;
+/* Botón + usuarios */
+.usuarios-plus {
+  height: 34px;
+  width: 34px;
   border-radius: 999px;
-  font-size: 0.75rem;
-  border: 1px solid transparent;
+  border: 1px solid var(--borde);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.08s ease, box-shadow 0.15s ease;
 }
-.badge-pendiente {
-  background: color-mix(in oklab, var(--azul) 10%, #f1f5f9);
-  border-color: color-mix(in oklab, var(--azul) 35%, #e2e8f0);
-  color: #0b3a55;
+.usuarios-plus i {
+  font-size: 0.9rem;
+  color: var(--azul);
 }
-.badge-activo {
-  background: color-mix(in oklab, var(--verde) 12%, #f0fdf4);
-  border-color: color-mix(in oklab, var(--verde) 40%, #bbf7d0);
-  color: #166534;
+.usuarios-plus:hover {
+  background: #f1f5f9;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
 }
-
-/* Modal genérico de pacientes/usuarios (si ya lo tienes, reúsalo) */
-.pac-modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:2000;
-}
-.pac-modal.open{
-  display:flex;
-}
-.pac-modal-backdrop{
-  position:absolute;
-  inset:0;
-  background:rgba(15,23,42,.45);
-}
-.pac-modal-card{
-  position:relative;
-  background:var(--bg);
-  border-radius:18px;
-  border:1px solid var(--borde);
-  box-shadow:0 20px 50px rgba(15,23,42,.45);
-  max-width:720px;
-  width:92%;
-  padding:1rem 1.25rem 1.25rem;
-}
-.pac-modal-cartilla{
-  max-width:780px;
-}
-.pac-modal-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:.75rem;
-  padding-bottom:.5rem;
-  border-bottom:1px solid var(--borde);
-}
-.pac-modal-head h3{
-  margin:0;
-}
-.pac-modal-body{
-  padding-top:.75rem;
-}
-.pac-modal-close{
-  border-radius:999px;
-  border:1px solid var(--borde);
-  background:#fff;
-  width:28px;
-  height:28px;
-  display:grid;
-  place-items:center;
-  cursor:pointer;
+.usuarios-plus:active {
+  transform: translateY(1px);
 }
 
-/* Cabecera de la cartilla */
-.cartilla-header{
-  display:flex;
-  align-items:center;
-  gap:.75rem;
-  margin-bottom:.75rem;
+/* =======================
+   MODAL GENÉRICO PACIENTES
+======================= */
+.pac-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
 }
-.cartilla-logo{
-  width:44px;
-  height:44px;
-  border-radius:16px;
-  overflow:hidden;
-  background:var(--verde);
-  display:grid;
-  place-items:center;
+.pac-modal.open {
+  display: flex;
 }
-.cartilla-logo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.pac-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
 }
-.cartilla-header-text b{
-  display:block;
+.pac-modal-card {
+  position: relative;
+  background: var(--bg);
+  border-radius: 18px;
+  border: 1px solid var(--borde);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.45);
+  max-width: 720px;
+  width: 92%;
+  padding: 1rem 1.25rem 1.25rem;
 }
-.cartilla-header-text span{
-  font-size:.8rem;
-  color:var(--muted);
+.pac-modal-cartilla {
+  max-width: 780px;
 }
-.cartilla-header-text small{
-  font-size:.75rem;
-  color:var(--muted);
+.pac-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--borde);
 }
-
-/* Cartilla card */
-.cartilla-card{
-  margin-top:.5rem;
+.pac-modal-head h3 {
+  margin: 0;
 }
-.cartilla-card table{
-  margin-top:.4rem;
+.pac-modal-body {
+  padding-top: 0.75rem;
 }
-
-/* Botones debajo del modal */
-.cartilla-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:.5rem;
-  margin-top:1rem;
-}
-
-/* Botones base que ya usas (ajustar si hace falta) */
-.btn-azul{
-  background:var(--azul);
-  color:#fff;
-  border-radius:12px;
-  border:none;
-  padding:.45rem .9rem;
-  font-size:.85rem;
-  cursor:pointer;
-}
-.btn-azul i{
-  margin-right:.25rem;
-}
-.btn-azul:hover{
-  filter:brightness(.95);
-}
-.btn-ghost{
-  background:#fff;
-  border-radius:12px;
-  border:1px solid var(--borde);
-  padding:.45rem .9rem;
-  font-size:.85rem;
-  cursor:pointer;
+.pac-modal-close {
+  border-radius: 999px;
+  border: 1px solid var(--borde);
+  background: #fff;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
 }
 
-/* Opcional: cuando imprimas, deja solo la cartilla */
-/* ===== Estilo de impresión para cartilla ===== */
-@media print {
-  body * {
-    visibility: hidden;
-  }
-
-  #cartillaPrintArea,
-  #cartillaPrintArea * {
-    visibility: visible;
-  }
-
-  #cartillaPrintArea {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    padding: 1.5rem;
-    background: #ffffff;
-  }
-}
-
-
-/* ===== Diseño del encabezado de la cartilla ===== */
+/* =======================
+   CARTILLA HEADER / CARD
+======================= */
 .cartilla-header {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.cartilla-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--verde);
+  display: grid;
+  place-items: center;
 }
 
 .cartilla-logo img {
@@ -663,338 +625,298 @@ th {
   font-weight: 700;
 }
 
-.cartilla-header-text small {
-  color: var(--muted);
+.cartilla-header-text span {
   font-size: 0.8rem;
+  color: var(--muted);
 }
 
+.cartilla-header-text small {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
 
-/* ===== Mi perfil ===== */
+.cartilla-card {
+  margin-top: 0.5rem;
+}
 
-.perfil-layout{
-  display:grid;
-  gap:1.25rem;
-  align-items:flex-start;
-  grid-template-columns:280px minmax(0,1fr);
+.cartilla-card table {
+  margin-top: 0.4rem;
+}
+
+.cartilla-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* =======================
+   BOTONES BASE
+======================= */
+.btn-azul {
+  background: var(--azul);
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.btn-azul i {
+  margin-right: 0.25rem;
+}
+.btn-azul:hover {
+  filter: brightness(0.95);
+}
+.btn-ghost {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--borde);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* =======================
+   MI PERFIL
+======================= */
+.perfil-layout {
+  display: grid;
+  gap: 1.25rem;
+  align-items: flex-start;
+  grid-template-columns: 280px minmax(0, 1fr);
 }
 
 /* Tarjeta izquierda */
-.perfil-card{
-  border-radius:18px;
-  border:1px solid var(--borde);
-  background:#f8fafc;
-  padding:1.25rem 1rem;
-  box-shadow:0 1px 3px rgba(15,23,42,.04);
+.perfil-card {
+  border-radius: 18px;
+  border: 1px solid var(--borde);
+  background: #f8fafc;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
-.perfil-avatar{
-  width:96px;
-  height:96px;
-  border-radius:999px;
-  margin:0 auto .75rem;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg, var(--azul), var(--verde));
-  color:#fff;
-  font-size:1.4rem;
-  font-weight:700;
-}
-
-.perfil-nombre{
-  text-align:center;
-  font-weight:700;
-  margin-bottom:.15rem;
-}
-
-.perfil-rol{
-  text-align:center;
-  font-size:.85rem;
-  color:var(--muted);
-  margin-bottom:.75rem;
-}
-
-.perfil-lista{
-  border-top:1px solid var(--borde);
-  padding-top:.75rem;
-  display:grid;
-  gap:.5rem;
-}
-
-.perfil-item{
-  display:flex;
-  align-items:flex-start;
-  gap:.5rem;
-  font-size:.85rem;
-}
-
-.perfil-item i{
-  margin-top:.05rem;
-  font-size:.9rem;
-  color:var(--azul);
-}
-
-.perfil-item small{
-  display:block;
-  font-size:.7rem;
-  color:var(--muted);
-}
-
-.perfil-item span{
-  font-size:.85rem;
-}
-
-/* Columna derecha */
-.perfil-form-col{
-  display:flex;
-  flex-direction:column;
-  gap:1rem;
-}
-
-.perfil-card-form{
-  padding:1rem 1.1rem 1.25rem;
-}
-
-.perfil-section-title{
-  display:flex;
-  align-items:center;
-  gap:.35rem;
-  font-weight:600;
-  margin-bottom:.75rem;
-}
-
-.perfil-section-title .dot{
-  width:8px;
-  height:8px;
-  border-radius:999px;
-  background:var(--azul);
-}
-
-/* Grid del formulario */
-.perfil-grid{
-  display:grid;
-  gap:.75rem .75rem;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-}
-
-.perfil-field{
-  display:flex;
-  flex-direction:column;
-  gap:.15rem;
-  font-size:.82rem;
-}
-
-.perfil-field span{
-  color:var(--muted);
-}
-
-.perfil-field input{
-  border-radius:10px;
-  border:1px solid var(--borde);
-  padding:.45rem .6rem;
-  font-size:.88rem;
-}
-
-.perfil-field input:focus{
-  outline:none;
-  border-color:var(--azul);
-  box-shadow:0 0 0 2px color-mix(in oklab, var(--azul) 30%, transparent);
-}
-
-.perfil-field-full{
-  grid-column:1 / -1;
-}
-
-/* Acciones al final */
-.perfil-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:.5rem;
-  margin-top:.75rem;
-}
-
-/* Botones reutilizando tu paleta */
-.btn-azul{
-  background:var(--azul);
-  color:#fff;
-  border-radius:12px;
-  border:none;
-  padding:.45rem .9rem;
-  font-size:.85rem;
-  cursor:pointer;
-}
-.btn-azul:hover{
-  filter:brightness(.96);
-}
-
-.btn-ghost{
-  background:#fff;
-  border-radius:12px;
-  border:1px solid var(--borde);
-  padding:.45rem .9rem;
-  font-size:.85rem;
-  cursor:pointer;
-}
-
-/* Responsive */
-@media (max-width:900px){
-  .perfil-layout{
-    grid-template-columns:1fr;
-  }
-}
-@media (max-width:640px){
-  .perfil-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-/* ===== Acordeón Mi perfil (usa las mismas tarjetas) ===== */
-
-.perfil-acc-item{
-  padding:0;              /* que la tarjeta no meta padding exterior */
-  overflow:hidden;
-}
-
-/* Barra clickeable */
-.perfil-acc-head{
-  width:100%;
-  border:none;
-  background:transparent;
-  padding:.65rem 1rem .45rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  cursor:pointer;
-}
-.perfil-acc-head i{
-  font-size:.8rem;
-  color:var(--muted);
-  transition:transform .18s ease;
-}
-
-/* Cuerpo colapsable */
-.perfil-acc-body{
-  max-height:0;
-  overflow:hidden;
-  padding:0 1rem;
-  transition:
-    max-height .25s ease,
-    padding-top .2s ease,
-    padding-bottom .2s ease;
-}
-
-/* Cuando está abierto */
-.perfil-acc-item.perfil-acc-open .perfil-acc-body{
-  padding:.35rem 1rem 1rem;
-  max-height:800px;  /* suficiente para el contenido */
-}
-.perfil-acc-item.perfil-acc-open .perfil-acc-head i{
-  transform:rotate(180deg);
-}
-
-/* Texto de "guardado automático" */
-.perfil-auto-msg{
-  margin-top:.4rem;
-  font-size:.75rem;
-}
-
-.cartilla-head-actions{
-  display:flex;
-  align-items:center;
-  gap:.5rem;
-}
-
-/* El botón ya usa .btn-azul; solo lo alineamos */
-.cartilla-head-actions .btn-azul{
-  font-size:.8rem;
-  padding:.35rem .75rem;
-}
-
-/* Si quieres que el botón agregar-vacuna en la tabla se vea igual que los otros íconos, 
-   ya usa .btn-usr-icon, así que no necesitas CSS extra */
-
-
-.usuarios-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:.75rem;
-}
-
-.usuarios-filtros{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.5rem;
-}
-
-.usuarios-busqueda input{
-  border-radius:999px;
-  border:1px solid var(--borde);
-  padding:.3rem .8rem;
-  font-size:.85rem;
-  min-width:220px;
-}
-
-.usuarios-busqueda input:focus{
-  outline:none;
-  border-color:var(--azul);
-  box-shadow:0 0 0 2px color-mix(in oklab, var(--azul) 25%, transparent);
-}
-
-/* ===== Usuarios: header, buscador y botón + ===== */
-.usuarios-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-.usuarios-header-left {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-.usuarios-header-right {
+.perfil-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #e2e8f0;
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #0f172a;
+  margin: 0 auto 0.5rem;
+  overflow: hidden;
+}
+
+.perfil-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil-nombre {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.perfil-rol {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.perfil-cambiar-foto {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.btn-foto {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  color: #0f172a;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-foto i {
+  color: #2ecc71;
+  margin-right: 0.4rem;
+}
+
+.btn-foto:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: scale(1.02);
+}
+
+.perfil-lista {
+  border-top: 1px solid var(--borde);
+  padding-top: 0.75rem;
+  display: grid;
   gap: 0.5rem;
 }
-.usuarios-busqueda input {
-  border-radius: 999px;
-  border: 1px solid var(--borde);
-  padding: 0.3rem 0.8rem;
+
+.perfil-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
   font-size: 0.85rem;
-  min-width: 220px;
 }
-.usuarios-busqueda input:focus {
-  outline: none;
-  border-color: var(--azul);
-  box-shadow: 0 0 0 2px color-mix(in oklab, var(--azul) 25%, transparent);
-}
-.usuarios-plus {
-  height: 34px;
-  width: 34px;
-  border-radius: 999px;
-  border: 1px solid var(--borde);
-  background: #fff;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  transition: background 0.15s ease, transform 0.08s ease,
-    box-shadow 0.15s ease;
-}
-.usuarios-plus i {
+
+.perfil-item i {
+  margin-top: 0.05rem;
   font-size: 0.9rem;
   color: var(--azul);
 }
-.usuarios-plus:hover {
-  background: #f1f5f9;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
-}
-.usuarios-plus:active {
-  transform: translateY(1px);
+
+.perfil-item small {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--muted);
 }
 
-/* ===== Modal Registrar vacuna ===== */
+.perfil-item span {
+  font-size: 0.85rem;
+}
+
+/* Columna derecha */
+.perfil-form-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.perfil-card-form {
+  padding: 1rem 1.1rem 1.25rem;
+}
+
+.perfil-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.perfil-section-title .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--azul);
+}
+
+/* Grid del formulario */
+.perfil-grid {
+  display: grid;
+  gap: 0.75rem 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.perfil-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.82rem;
+}
+
+.perfil-field span {
+  color: var(--muted);
+}
+
+.perfil-field input {
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+  padding: 0.45rem 0.6rem;
+  font-size: 0.88rem;
+}
+
+.perfil-field input:focus {
+  outline: none;
+  border-color: var(--azul);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--azul) 30%, transparent);
+}
+
+.perfil-field-full {
+  grid-column: 1 / -1;
+}
+
+/* Acciones al final */
+.perfil-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* Acordeón Mi perfil */
+.perfil-acc-item {
+  padding: 0;
+  overflow: hidden;
+}
+
+.perfil-acc-head {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0.65rem 1rem 0.45rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.perfil-acc-head i {
+  font-size: 0.8rem;
+  color: var(--muted);
+  transition: transform 0.18s ease;
+}
+
+.perfil-acc-body {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1rem;
+  transition: max-height 0.25s ease, padding-top 0.2s ease,
+    padding-bottom 0.2s ease;
+}
+
+.perfil-acc-item.perfil-acc-open .perfil-acc-body {
+  padding: 0.35rem 1rem 1rem;
+  max-height: 800px;
+}
+.perfil-acc-item.perfil-acc-open .perfil-acc-head i {
+  transform: rotate(180deg);
+}
+
+.perfil-auto-msg {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+}
+
+/* Responsive perfil */
+@media (max-width: 900px) {
+  .perfil-layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .perfil-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =======================
+   REGISTRAR VACUNA / FORM
+======================= */
 .rv-grid {
   display: grid;
   gap: 0.75rem;
@@ -1036,5 +958,160 @@ th {
 @media (max-width: 768px) {
   .rv-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* =======================
+   PROGRESO RESUMEN
+======================= */
+.progress {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: #2ecc71;
+  transition: width 0.4s ease;
+}
+
+/* =======================
+   CARTILLA FÍSICA (EN PANTALLA)
+======================= */
+.cartilla-fisica {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.cartilla-fisica h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+/* Tabla tipo cartilla física / matriz */
+.cartilla-matriz {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.cartilla-matriz th,
+.cartilla-matriz td {
+  border: 1px solid #e2e8f0;
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+}
+
+.cartilla-matriz th {
+  background: #e5f9f0;
+  font-weight: 600;
+}
+
+.cartilla-matriz td.slot {
+  min-height: 2.2rem;
+}
+
+.cartilla-matriz .slot-pendiente {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.cartilla-matriz .slot-aplicada {
+  font-weight: 600;
+  color: #16a34a;
+}
+
+/* =======================
+   CARTILLA IMPRIMIBLE
+======================= */
+.cartilla-print {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+/* Encabezado con logo, título y datos de usuario */
+.cartilla-print-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cartilla-print-logo img {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid #2ecc71;
+}
+
+.cartilla-print-title h1 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.cartilla-print-title p {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.cartilla-print-user p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* Cuerpo cartilla */
+.cartilla-print-body h2 {
+  margin: 0.5rem 0 0.75rem;
+  font-size: 1rem;
+}
+
+/* Pie de página */
+.cartilla-print-footer {
+  margin-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* =======================
+   MODO IMPRESIÓN CARTILLA
+======================= */
+@media print {
+  body.modo-impresion-cartilla * {
+    visibility: hidden;
+  }
+
+  body.modo-impresion-cartilla #cartillaPrintArea,
+  body.modo-impresion-cartilla #cartillaPrintArea * {
+    visibility: visible;
+  }
+
+  body.modo-impresion-cartilla #cartillaPrintArea {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
   }
 }

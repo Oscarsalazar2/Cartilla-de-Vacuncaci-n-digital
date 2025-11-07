@@ -1,27 +1,32 @@
+// =======================
+//  AVATAR GLOBAL
+// =======================
+
 // Inicializar avatar del usuario
 let userName = localStorage.getItem("userName") || "";
 let userImage = localStorage.getItem("userImage") || "";
 
-const userNameEl = document.getElementById("userName");
-const railAvatar = document.getElementById("railAvatar");
-const userAvatarMini = document.getElementById("userAvatarMini");
-
-// Actualiza nombre
-if (userNameEl) {
-  userNameEl.textContent = userName || "Usuario invitado";
-}
-
-// Función para obtener iniciales
+// Función para iniciales (US, E1, etc.)
 function getInitials(name) {
-  if (!name.trim()) return "U"; // U de "Usuario"
+  if (!name || !name.trim()) return "US";
   const parts = name.trim().split(/\s+/);
   if (parts.length === 1) return parts[0][0].toUpperCase();
   return (parts[0][0] + parts[1][0]).toUpperCase();
 }
 
-// Mostrar imagen o iniciales
+const userNameEl = document.getElementById("userName");
+const railAvatar = document.getElementById("railAvatar");
+const userAvatarMini = document.getElementById("userAvatarMini");
+
+// Actualiza nombre en el topbar
+if (userNameEl) {
+  userNameEl.textContent = userName || "Usuario invitado";
+}
+
+// Mostrar imagen o iniciales en los avatares globales
 function setAvatar(el, size = 52) {
   if (!el) return;
+
   if (userImage) {
     el.innerHTML = `<img src="${userImage}" alt="Avatar">`;
   } else {
@@ -38,11 +43,13 @@ function setAvatar(el, size = 52) {
   }
 }
 
-// Aplica en los dos lugares
+// Aplica en los dos lugares (rail izquierdo y topbar)
 setAvatar(railAvatar, 52);
 setAvatar(userAvatarMini, 26);
 
-// Botones del rail lateral
+// =======================
+//  NAVEGACIÓN RAIL LATERAL
+// =======================
 const railItems = document.querySelectorAll(".rail-item");
 const sections = document.querySelectorAll(".content-section");
 const topbarTitle = document.getElementById("topbarTitle");
@@ -50,10 +57,10 @@ const topbarTitle = document.getElementById("topbarTitle");
 const titulos = {
   resumen: "Resumen general",
   "mis-vacunas": "Historial de vacunas",
-  usuarios: "Usuarios del sistema", // 👈 nuevo
+  usuarios: "Usuarios del sistema",
   citas: "Citas de vacunación",
   ajustes: "Ajustes del sistema",
-  qr: "QR", // si quieres que también tenga título
+  qr: "QR",
 };
 
 railItems.forEach((btn) => {
@@ -76,7 +83,9 @@ railItems.forEach((btn) => {
   });
 });
 
-// Dropdown usuario
+// =======================
+//  DROPDOWN USUARIO
+// =======================
 const userBtn = document.getElementById("userMenuBtn");
 const userDropdown = document.getElementById("userDropdown");
 
@@ -89,51 +98,23 @@ document.addEventListener("click", () => {
   userDropdown?.classList.remove("open");
 });
 
-// ========= Detalle de vacuna en modal =========
+// =======================
+//  DETALLE VACUNA EN MODAL (DEMO)
+// =======================
 
-// Datos de ejemplo despues conectar la bsd
+// Datos de ejemplo (después conectar a la BD)
 const detalleVacunas = {
   covid19: [
-    {
-      dosis: 1,
-      fecha: "10/01/2024",
-      marca: "Pfizer",
-      lote: "PFZ-001",
-    },
-    {
-      dosis: 2,
-      fecha: "10/03/2024",
-      marca: "Pfizer",
-      lote: "PFZ-019",
-    },
-    {
-      dosis: 3,
-      fecha: "12/03/2025",
-      marca: "Pfizer",
-      lote: "PFZ-077",
-    },
+    { dosis: 1, fecha: "10/01/2024", marca: "Pfizer", lote: "PFZ-001" },
+    { dosis: 2, fecha: "10/03/2024", marca: "Pfizer", lote: "PFZ-019" },
+    { dosis: 3, fecha: "12/03/2025", marca: "Pfizer", lote: "PFZ-077" },
   ],
   hepB: [
-    {
-      dosis: 1,
-      fecha: "09/11/2024",
-      marca: "Sanofi",
-      lote: "SNF-221",
-    },
-    {
-      dosis: 2,
-      fecha: "09/01/2025",
-      marca: "Sanofi",
-      lote: "SNF-310",
-    },
+    { dosis: 1, fecha: "09/11/2024", marca: "Sanofi", lote: "SNF-221" },
+    { dosis: 2, fecha: "09/01/2025", marca: "Sanofi", lote: "SNF-310" },
   ],
   influenza: [
-    {
-      dosis: 1,
-      fecha: "—",
-      marca: "Por aplicar",
-      lote: "—",
-    },
+    { dosis: 1, fecha: "—", marca: "Por aplicar", lote: "—" },
   ],
 };
 
@@ -182,7 +163,11 @@ function cerrarModalVacuna() {
 modalCerrar?.addEventListener("click", cerrarModalVacuna);
 modalBackdrop?.addEventListener("click", cerrarModalVacuna);
 
-// ===== Admin usuarios (demo front) =====
+// =======================
+//  ADMIN USUARIOS (DEMO)
+// =======================
+
+// Activar usuario (cambia badge)
 document.addEventListener("click", (e) => {
   const btn = e.target.closest("[data-activar-usuario]");
   if (!btn) return;
@@ -203,7 +188,7 @@ document.addEventListener("click", (e) => {
   btn.textContent = "Activado";
 });
 
-// ===== Filtros de usuarios (solo frontend) =====
+// Filtros de usuarios (solo frontend)
 const filtroBtns = document.querySelectorAll("[data-usuarios-filter]");
 const tablaUsuariosBody = document.getElementById("tablaUsuariosBody");
 
@@ -227,8 +212,9 @@ filtroBtns.forEach((btn) => {
   });
 });
 
-// ===== Cartillas demo por usuario =====
-// Luego esto se va a remplazar por datos reales de tu BD / backend
+// =======================
+//  CARTILLAS DEMO POR USUARIO
+// =======================
 const cartillasUsuarios = {
   "juan@example.com": [
     { vacuna: "BCG", fecha: "15/01/2024", dosis: "Única", estado: "Aplicada" },
@@ -292,7 +278,7 @@ tablaUsuarios?.addEventListener("click", (e) => {
   modalCartillaUsuario?.classList.add("open");
 });
 
-// Cerrar modal (usa el mismo selector genérico si ya lo tenías)
+// Cerrar modal cartilla
 document.querySelectorAll("[data-close-pac-modal]").forEach((btn) => {
   btn.addEventListener("click", () => {
     modalCartillaUsuario?.classList.remove("open");
@@ -309,11 +295,12 @@ document
 
 // Descargar cartilla = abrir la ventana de impresión (usuario puede Guardar como PDF)
 btnDescargarCartilla?.addEventListener("click", () => {
-  // Truco: usamos el CSS @media print para que solo imprima la cartilla
   window.print();
 });
 
-// ===== Rellenar datos básicos del perfil (demo) =====
+// =======================
+//  PERFIL: DATOS BÁSICOS
+// =======================
 const perfilNombreEl = document.getElementById("perfilNombre");
 const perfilAvatarInicialesEl = document.getElementById("perfilAvatarIniciales");
 const perfilCorreoEl = document.getElementById("perfilCorreo");
@@ -324,18 +311,14 @@ const storedEmail = localStorage.getItem("userEmail") || "correo@example.com";
 if (perfilNombreEl) perfilNombreEl.textContent = storedName;
 if (perfilCorreoEl) perfilCorreoEl.textContent = storedEmail;
 
-// Iniciales del avatar
-function getInitials(name) {
-  if (!name.trim()) return "US";
-  const parts = name.trim().split(/\s+/);
-  if (parts.length === 1) return parts[0][0].toUpperCase();
-  return (parts[0][0] + parts[1][0]).toUpperCase();
-}
+// Iniciales del avatar de perfil (usa la misma getInitials)
 if (perfilAvatarInicialesEl) {
   perfilAvatarInicialesEl.textContent = getInitials(storedName);
 }
 
-// ===== Acordeón Mi perfil =====
+// =======================
+//  ACORDEÓN MI PERFIL
+// =======================
 const accHeads = document.querySelectorAll(".perfil-acc-head");
 
 accHeads.forEach((head) => {
@@ -352,7 +335,9 @@ accHeads.forEach((head) => {
   });
 });
 
-// Buscador por nombre / correo / CURP
+// =======================
+//  BUSCADOR USUARIOS
+// =======================
 const usuariosSearchInput = document.getElementById("usuariosSearchInput");
 
 if (usuariosSearchInput) {
@@ -370,7 +355,7 @@ if (usuariosSearchInput) {
         email.includes(term) ||
         curp.includes(term);
 
-      // además respetamos el filtro actual (ciudadano / medico / todos)
+      // respetar filtro actual (ciudadano / medico / todos)
       const btnActivo = document.querySelector(".usuarios-pill-activo");
       const filtro = btnActivo?.getAttribute("data-usuarios-filter") || "todos";
       const tipoFila = tr.getAttribute("data-tipo") || "todos";
@@ -382,7 +367,9 @@ if (usuariosSearchInput) {
   });
 }
 
-// ===== Guardado automático de contacto + domicilio (demo con localStorage) =====
+// =======================
+//  AUTOGUARDADO PERFIL (LOCALSTORAGE DEMO)
+// =======================
 const autoFields = [
   "perfilCorreoInput",
   "perfilCelularInput",
@@ -407,13 +394,13 @@ autoFields.forEach((id) => {
   // Guardar automáticamente al cambiar
   el.addEventListener("change", () => {
     localStorage.setItem(id, el.value);
-    // Aquí podrías mostrar un toast si ya tienes sistema de toasts:
-    // showToast("Cambios guardados");
     console.log("Guardado automático de", id);
   });
 });
 
-// ===== Cambiar contraseña (solo frontend por ahora) =====
+// =======================
+//  CAMBIAR CONTRASEÑA (DEMO)
+// =======================
 const btnPassGuardar = document.getElementById("btnPerfilPassGuardar");
 const btnPassCancelar = document.getElementById("btnPerfilPassCancelar");
 const inputPassActual = document.getElementById("perfilPassActual");
@@ -450,8 +437,11 @@ btnPassGuardar?.addEventListener("click", () => {
   inputPassConfirmar.value = "";
 });
 
+// =======================
+//  REGISTRAR VACUNA (MODAL)
+// =======================
 const userRole = localStorage.getItem("userRole") || "ciudadano";
- 
+
 // Botones "Agregar vacuna" en tabla
 const btnsAgregarVacuna = document.querySelectorAll(".agregar-vacuna-usuario");
 // Botón "Registrar vacuna" dentro del modal de cartilla
@@ -459,14 +449,7 @@ const btnRegistrarDesdeCartilla = document.getElementById("btnRegistrarDesdeCart
 
 // Mostrar solo a admin / medico
 if (userRole === "admin" || userRole === "medico") {
-  
-// Abrir modal Registrar vacuna desde la cartilla
-btnRegistrarDesdeCartilla?.addEventListener("click", () => {
-  const nombre = cartillaNombreUsuario?.textContent?.trim() || "";
-  abrirModalRegistrar(nombre);
-});
-
-btnsAgregarVacuna.forEach((btn) => {
+  btnsAgregarVacuna.forEach((btn) => {
     btn.style.display = "inline-flex";
   });
   if (btnRegistrarDesdeCartilla) {
@@ -474,7 +457,6 @@ btnsAgregarVacuna.forEach((btn) => {
   }
 }
 
-// ===== Modal Registrar Vacuna =====
 const modalRegistrarVacuna = document.getElementById("modalRegistrarVacuna");
 const rvPaciente = document.getElementById("rvPaciente");
 const rvVacuna = document.getElementById("rvVacuna");
@@ -505,13 +487,13 @@ document
     el.addEventListener("click", cerrarModalRegistrar);
   });
 
-  
-// Abrir modal Registrar vacuna desde la cartilla
+// Abrir modal Registrar vacuna desde la cartilla (una sola vez)
 btnRegistrarDesdeCartilla?.addEventListener("click", () => {
   const nombre = cartillaNombreUsuario?.textContent?.trim() || "";
   abrirModalRegistrar(nombre);
 });
 
+// Abrir modal Registrar vacuna desde botón en tabla
 btnsAgregarVacuna.forEach((btn) => {
   btn.addEventListener("click", () => {
     const nombre =
@@ -522,6 +504,7 @@ btnsAgregarVacuna.forEach((btn) => {
   });
 });
 
+// Guardar vacuna (demo local)
 formRegistrarVacuna?.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -537,7 +520,6 @@ formRegistrarVacuna?.addEventListener("submit", (e) => {
     return;
   }
 
-  // Aquí necesitarás saber con qué correo se guarda.
   // De momento, usamos el correo de la cartilla abierta:
   const correo = emailCartillaActual || "";
 
@@ -548,7 +530,7 @@ formRegistrarVacuna?.addEventListener("submit", (e) => {
       vacuna,
       fecha,
       dosis,
-      estado: "Aplicada", // puedes mejorar esto según dosis
+      estado: "Aplicada",
       lote,
       obs,
     });
@@ -571,7 +553,56 @@ formRegistrarVacuna?.addEventListener("submit", (e) => {
 
   alert("Vacuna registrada (demo, falta conectar a la BD).");
   cerrarModalRegistrar();
-
-  
 });
 
+// =======================
+//  CAMBIAR FOTO DE PERFIL
+// =======================
+document.addEventListener('DOMContentLoaded', () => {
+  const btnCambiarFoto = document.getElementById('btnCambiarFoto');
+  const inputFoto = document.getElementById('inputFotoPerfil');
+  const imgPerfil = document.getElementById('perfilFoto');
+  const spanIniciales = document.getElementById('perfilAvatarIniciales');
+
+  if (!btnCambiarFoto || !inputFoto) return;
+
+  // 1. Al hacer clic en "Cambiar foto" abrimos el selector de archivos
+  btnCambiarFoto.addEventListener('click', () => {
+    inputFoto.click();
+  });
+
+  // 2. Cuando el usuario elige una imagen
+  inputFoto.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const dataUrl = e.target.result;
+
+      // Avatar grande del perfil
+      if (imgPerfil) {
+        imgPerfil.src = dataUrl;
+        imgPerfil.style.display = 'block';
+      }
+
+      // Ocultar iniciales del perfil
+      if (spanIniciales) {
+        spanIniciales.style.display = 'none';
+      }
+
+      // Guardar imagen y refrescar avatares globales
+      localStorage.setItem("userImage", dataUrl);
+      userImage = dataUrl;                // actualiza la variable global
+
+      // vuelve a pintar los avatares del rail y del header
+      setAvatar(railAvatar, 52);
+      setAvatar(userAvatarMini, 26);
+
+      // Aquí después puedes mandar el archivo al backend con fetch/FormData
+    };
+
+    reader.readAsDataURL(file);
+  });
+});

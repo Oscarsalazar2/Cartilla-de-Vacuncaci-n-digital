@@ -69,60 +69,59 @@
       </aside>
       <!-- Modal: Cartilla del usuario -->
       <div class="pac-modal" id="modalCartillaUsuario">
-  <div class="pac-modal-backdrop" data-close-pac-modal></div>
-  <div class="pac-modal-card pac-modal-cartilla">
-    <div class="pac-modal-head">
-      <div>
-        <h3>Cartilla de vacunación</h3>
-        <p class="muted">Vacunas registradas para este usuario.</p>
-      </div>
-      <div class="cartilla-actions">
-        <button type="button" class="btn-ghost" data-close-pac-modal>
-          Cerrar
-        </button>
-        <button type="button" class="btn-azul" id="btnDescargarCartilla">
-          <i class="fa-solid fa-download"></i> Descargar cartilla
-        </button>
-      </div>
-    </div>
-
-    <div class="pac-modal-body">
-      <!-- SOLO esta zona se imprimirá -->
-      <div id="cartillaPrintArea">
-        <div class="cartilla-header">
-          <div class="cartilla-logo">
-            <img src="logo.jpg" alt="Logo eCartilla" />
+        <div class="pac-modal-backdrop" data-close-pac-modal></div>
+        <div class="pac-modal-card pac-modal-cartilla">
+          <div class="pac-modal-head">
+            <div>
+              <h3>Cartilla de vacunación</h3>
+              <p class="muted">Vacunas registradas para este usuario.</p>
+            </div>
+            <div class="cartilla-actions">
+              <button type="button" class="btn-ghost" data-close-pac-modal>
+                Cerrar
+              </button>
+              <button type="button" class="btn-azul" id="btnDescargarCartilla">
+                <i class="fa-solid fa-download"></i> Descargar cartilla
+              </button>
+            </div>
           </div>
-          <div class="cartilla-header-text">
-            <!-- Estos IDs se rellenan desde JS -->
-            <b id="cartillaNombreUsuario">Nombre del usuario</b>
-            <span id="cartillaEmailUsuario">correo@example.com</span>
-            <small>Cartilla digital de vacunación</small>
+
+          <div class="pac-modal-body">
+            <!-- SOLO esta zona se imprimirá -->
+            <div id="cartillaPrintArea">
+              <div class="cartilla-header">
+                <div class="cartilla-logo">
+                  <img src="logo.jpg" alt="Logo eCartilla" />
+                </div>
+                <div class="cartilla-header-text">
+                  <!-- Estos IDs se rellenan desde JS -->
+                  <b id="cartillaNombreUsuario">Nombre del usuario</b>
+                  <span id="cartillaEmailUsuario">correo@example.com</span>
+                  <small>Cartilla digital de vacunación</small>
+                </div>
+              </div>
+
+              <div class="dash-card cartilla-card">
+                <b>Vacunas registradas</b>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Vacuna</th>
+                      <th>Fecha</th>
+                      <th>Dosis</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cartillaTablaBody">
+                    <!-- filas generadas por JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- fin cartillaPrintArea -->
           </div>
         </div>
-
-        <div class="dash-card cartilla-card">
-          <b>Vacunas registradas</b>
-          <table>
-            <thead>
-              <tr>
-                <th>Vacuna</th>
-                <th>Fecha</th>
-                <th>Dosis</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody id="cartillaTablaBody">
-              <!-- filas generadas por JS -->
-            </tbody>
-          </table>
-        </div>
       </div>
-      <!-- fin cartillaPrintArea -->
-    </div>
-  </div>
-</div>
-
 
       <!-- Modal Registrar Vacuna -->
       <div class="pac-modal" id="modalRegistrarVacuna">
@@ -258,21 +257,64 @@
             </p>
 
             <div class="cards-grid">
+              <!-- Vacunas completas -->
               <div class="dash-card">
                 <b>Vacunas completas</b>
-                <div class="value">7</div>
-                <div class="tag">Esquema básico al día</div>
+                <div class="value" id="resVacunasCompletas">0</div>
+                <div class="tag" id="resVacunasCompletasTag">
+                  Cargando esquema...
+                </div>
               </div>
+
+              <!-- Próximas dosis -->
               <div class="dash-card">
                 <b>Próximas dosis</b>
-                <div class="value">2</div>
-                <div class="tag">En los próximos 30 días</div>
+                <div class="value" id="resProximasDosis">0</div>
+                <div class="tag" id="resProximasDosisTag">
+                  En los próximos 30 días
+                </div>
               </div>
+
+              <!-- Alertas -->
               <div class="dash-card">
                 <b>Alertas</b>
-                <div class="value">1</div>
-                <div class="tag">Revisa la vacuna de influenza</div>
+                <div class="value" id="resAlertas">0</div>
+                <div class="tag" id="resAlertasTag">Sin alertas por ahora</div>
               </div>
+            </div>
+
+            <!-- Progreso general, usando tus mismos estilos de texto -->
+            <div class="dash-progress">
+              <p class="muted">
+                Progreso del esquema:
+                <b><span id="resProgresoTexto">0 / 0</span></b>
+              </p>
+              <div class="progress">
+                <div
+                  class="progress-bar"
+                  id="resProgresoBar"
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+
+            <div class="cartilla-fisica">
+              <h3>Cartilla de vacunación</h3>
+
+              <table class="cartilla-matriz">
+                <thead>
+                  <tr>
+                    <th>Vacuna</th>
+                    <th>1ª dosis</th>
+                    <th>2ª dosis</th>
+                    <th>3ª dosis</th>
+                    <th>Refuerzo</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyCartillaMatriz">
+                  <!-- JS rellena aquí -->
+                </tbody>
+              </table>
             </div>
           </section>
 
@@ -565,7 +607,14 @@
               <!-- Columna izquierda: tarjeta resumen -->
               <aside class="perfil-card">
                 <div class="perfil-avatar">
-                  <!-- si luego quieres foto real, cambias el span por una img -->
+                  <!-- Imagen de perfil (se muestra cuando el usuario sube una foto) -->
+                  <img
+                    id="perfilFoto"
+                    src=""
+                    alt="Foto de perfil"
+                    style="display: none"
+                  />
+                  <!-- Iniciales como fallback -->
                   <span id="perfilAvatarIniciales">US</span>
                 </div>
 
@@ -573,9 +622,22 @@
                   Usuario invitado
                 </div>
 
-                <div class="perfil-rol" id="perfilRol">
-                  Usuario · Padre de familia
+                <div class="perfil-rol" id="perfilRol">Usuario</div>
+
+                <!-- Botón para cambiar foto -->
+                <div class="perfil-cambiar-foto">
+                  <button type="button" class="btn-foto" id="btnCambiarFoto">
+                    <i class="fa-solid fa-camera"></i> Cambiar foto
+                  </button>
                 </div>
+
+                <!-- INPUT OCULTO PARA SUBIR LA IMAGEN -->
+                <input
+                  type="file"
+                  id="inputFotoPerfil"
+                  accept="image/*"
+                  style="display: none"
+                />
 
                 <div class="perfil-lista">
                   <div class="perfil-item">
@@ -894,5 +956,7 @@
       </div>
     </div>
     <script src="dashboard.js"></script>
+    <script src="vacunas-esquema.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
