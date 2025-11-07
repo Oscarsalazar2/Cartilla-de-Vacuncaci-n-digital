@@ -1,7 +1,7 @@
 // =======================
 //  ROL DEL USUARIO (TEMPORAL PARA PRUEBAS)
 // =======================
-const userRole = localStorage.getItem("userRole") || "ciudadano"; // cambia a "medico" o "ciudadano" para probar
+const userRole = localStorage.getItem("userRole") || "medico"; // cambia a "medico" o "ciudadano" para probar
 
 // =======================
 //  AVATAR GLOBAL
