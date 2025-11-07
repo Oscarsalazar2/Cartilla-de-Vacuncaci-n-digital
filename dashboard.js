@@ -410,7 +410,7 @@ const btnRegistrarDesdeCartilla = document.getElementById(
 // =======================
 //  VISIBILIDAD Y PERMISOS POR ROL
 // =======================
-const userRole = localStorage.getItem("userRole") || "admin"; // 🔧 cámbialo a "admin"/"medico"/"ciudadano" para probar
+const userRole = localStorage.getItem("userRole") || "medico"; // 🔧 cámbialo a "admin"/"medico"/"ciudadano" para probar
 
 // Botones de acciones en la tabla
 const btnsEditarUsuario = document.querySelectorAll(".editar-usuario");
