@@ -1,8 +1,3 @@
-Perfecto 💪 aquí tienes tu README **listo para copiar y pegar** directamente en GitHub o VS Code:
-
----
-
-````markdown
 # 💉 eCartilla · Cartilla de Vacunación Digital
 
 **Instituto Tecnológico de Matamoros**  
@@ -175,6 +170,3 @@ Desarrollado por **Oscar Salazar**
 Estudiante de **Ingeniería en Sistemas Computacionales**
 **Instituto Tecnológico de Matamoros** – 2025
 
-```
-
-```
